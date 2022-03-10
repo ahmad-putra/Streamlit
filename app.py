@@ -14,9 +14,12 @@ Ini merupakan aplikasi Teknik Asosiasi sederhana menggunakan Algoritma ECLAT
 
 
 
-uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
+uploaded_file = st.file_uploader("Choose a file", type=["xlsx","csv"])
 if uploaded_file is not None:
-    input_df = pd.read_csv(uploaded_file)
+    try:
+        input_df = pd.read_excel(uploaded_file)
+    except:
+        input_df = pd.read_csv(uploaded_file)
 else:
     input_df = pd.read_csv("coba_pendaftar.csv")
     
@@ -94,7 +97,7 @@ if st.button('Run'):
             st.write(hasil)
             st.markdown("""
             Silahkan download hasil tersebut untuk selanjutnya dapat dilakukan pengolahan lebih detail
-            """)
+            """) 
             st.markdown(filedownload(hasil), unsafe_allow_html=True)
             
 #            return hasil
